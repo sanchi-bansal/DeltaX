@@ -1,0 +1,30 @@
+<h3><a class="btn btn-secondary " href="/deltax/castOperation"><i class="fa fa-plus" float="right"></i></a> Actor's List </h3>
+<table class = "table table-stripped">
+    <thead>
+        <th>Poster</th>
+        <th>Actor's Name</th>
+        <th>Date Of Birth</th>
+        <th>Sex</th>
+        <th>Bio</th>
+        <th></th>
+    </thead>
+    <tbody>
+        {{#each list}}
+        <tr><td><img src="/{{this.poster}}" height="100" width="100"></td>
+            <td>{{this.actorName}}</td>
+            <td>{{this.dateOfBirth}}</td>
+            <td>{{this.sex}}</td>
+            <td>{{this.bio}}</td>
+            <td>
+                <a href="cast/{{this._id}}"><i class = "fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+            </td>
+        </tr>
+
+        {{/each}}
+    </tbody>
+</table>
+<script>
+.alignright {
+  padding-right: 100px;
+}
+</script>

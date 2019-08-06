@@ -1,0 +1,74 @@
+
+<h3>{{viewTitle}}</h3>
+<form class ="form-horizontal" action = "/deltax/movieOperation" method = "POST" autocomplete="off " enctype="multipart/form-data">
+  
+  <input type="hidden" name="_id" value="{{movie._id}}">
+    <div class = "form-group">
+ 
+        <input type = "text" class ="form-control" name = "movieName" placeholder="Enter Movie Name" value="{{movie.movieName}}" required />
+        <div class="text-danger">{{movie.movieNameError}}</div>
+    </div>
+     <div class = "form-group">
+       
+        <input type = "text" class ="form-control" name = "yearOfRelease" placeholder="Year of Release"value="{{movie.yearOfRelease}}"  min="" max="100" required />
+         <div class="text-danger">{{movie.yearOfReleaseError}}</div>
+    </div>
+    <div class = "form-group">
+       
+        <input type = "text" class ="form-control" name = "plot" placeholder="Plot" value="{{movie.plot}}" required />
+        <div class="text-danger">{{movie.plotError}}</div>
+    </div>
+    <div class="form-row">
+    <div class = "form-group" col-md-6>
+        <label>Cast</label>
+
+            
+                <div>
+                    <ul><li onclick="this.parentNode.removeChild(this);"> </li></ul>
+                          
+                    <select class="item" onchange="selectActor(this);" />
+                        <option value="" selected hidden>Cast</option>
+                        {{# each items }}
+                            <option value="{{this.actorName}}"> "{{this.actorName}}"</option>
+                        {{/each}}
+                    </select>   
+                        <a href = "/deltax/castOperation"><i class="fa fa-plus-circle">Cast</i></a>
+                </div>
+        </div>
+    </div>
+    <div class = "form-group">
+        <label>Poster</label>
+        <input type = "file" class ="form-control" accept="image/*" name = "poster" placeholder="plot" value="{{movie.poster}}" required / >
+        <div class="text-danger">{{movie.posterError}}</div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-info" style="vertical-align:middle"><span>Submit</span></button>
+    </div>
+</form>
+
+<script>
+    function selectActor(select){
+        var option = select.options[select.selectedIndex];
+        var ul = select.parentNode.getElementsByTagName('ul')[0];
+        var choices = ul.getElementsByTagName('input');
+        
+        for (var i = 0; i < choices.length; i++)
+            if (choices[i].value == option.value)
+            return;
+            
+        var li = document.createElement('li');
+        var input = document.createElement('input');
+        var text = document.createTextNode(option.firstChild.data);
+            
+        input.type = 'hidden';
+        input.name = 'actor[]';
+        input.value = option.value;
+
+        li.appendChild(input);
+        li.appendChild(text);
+        li.setAttribute('onclick', 'this.parentNode.removeChild(this);');     
+            
+        ul.appendChild(li);
+        console.log(choices[0])
+    }
+</script>
